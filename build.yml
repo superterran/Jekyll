@@ -1,9 +1,5 @@
 ---
 - hosts: all
-  vars:
-   - docroot: /var/www/dotcom
-   - domain: superterran.com
-   - email: superterran@gmail.com
 
   tasks:
    - name: check if epel is on server
@@ -15,26 +11,10 @@
      when: epel.stat.exists != True
 
    - name: install prereqs 
-     yum: pkg=nodejs,npm,ruby,ruby-devel,git,httpd,ansible state=installed update_cache=true
-
-   - name: copy over httpd vhost
-     template: src=vhost.conf dest=/etc/httpd/conf.d/100-{{ domain }}.conf
-
-   - name: restart httpd
-     service: name=httpd state=restarted
-
-   - name: open up port 80
-     iptables: chain=INPUT protocol=tcp match=tcp destination_port=80 jump=ACCEPT
+     yum: pkg=nodejs,npm,ruby,ruby-devel state=installed update_cache=true
 
    - name: install jekyll
      shell: "gem install jekyll"
-
-   - name: ensure latest version of codebase is cloned down with submodules
-     git: repo=git@github.com:superterran/dotcom.git
-          accept_hostkey=True
-          track_submodules=yes
-          dest={{ docroot }}
-          force=True
 
    - name: build jekyll
      shell: "cd {{ docroot }}/jekyll && jekyll build"
