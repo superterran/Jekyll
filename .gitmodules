@@ -2,6 +2,3 @@
 	path = jekyll/demos/Legend-of-Canvas
 	url = git@github.com:superterran/Legend-of-Canvas.git
         branch = qunit
-[submodule "madhabits"]
-	path = madhabits
-	url = git@bitbucket.org:superterran/madhabits.git
