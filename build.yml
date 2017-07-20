@@ -14,7 +14,7 @@
      yum: pkg=nodejs,npm,ruby,ruby-devel state=installed update_cache=true
 
    - name: install jekyll
-     shell: "gem install jekyll"
+     shell: "sudo gem install jekyll"
 
    - name: build jekyll
      shell: "cd {{ docroot }}/jekyll && jekyll build"
